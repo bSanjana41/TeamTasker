@@ -10,6 +10,29 @@ Backend .env (Backend/.env)
 Frontend .env (Frontend/.env)
 -VITE_API_URL=http://localhost:5000/api
 
+### Install Dependencies
+Backend
+cd Backend
+npm install
+
+Frontend
+cd Frontend
+npm install
+
+### Run the Project Locally
+Backend
+cd Backend
+npm run start (using nodemon)
+
+Frontend
+cd Frontend
+npm run dev
+
+
+The frontend will usually run on http://localhost:5173 (Vite default).
+
+The backend API will run on http://localhost:5000/api.
+
 
 ### 1. Sign Up
 - Open the TeamTasker website in your browser.
