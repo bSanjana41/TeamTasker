@@ -1,3 +1,16 @@
+### 0. Setup
+Before running the project, create .env files in both Frontend and Backend folders.
+
+Backend .env (Backend/.env)
+-PORT=5000
+-MONGO_URI=your_mongodb_connection_string
+-JWT_SECRET=your_jwt_secret
+- NODE_ENV=development
+
+Frontend .env (Frontend/.env)
+-VITE_API_URL=http://localhost:5000/api
+
+
 ### 1. Sign Up
 - Open the TeamTasker website in your browser.
 - Click on **Sign Up**.
@@ -27,3 +40,4 @@
 
 ### 6. Stay Updated
 - Check notifications for updates and assignments.
+
