@@ -1,6 +1,7 @@
+import {config} from "dotenv"
+config({ path: "./.env" });
 import express from 'express';
 import cors from 'cors';
-import {config} from "dotenv"
 
 import authRoutes from "./routes/authRoutes.js"
 import projectRoutes from "./routes/projectRoutes.js"
@@ -14,9 +15,7 @@ import dbConnect from './config/dbConnect.js';
 import cookieParser from 'cookie-parser';
 
 
-
 const app = express();
-config()
 //middleware
 app.use(cors({
         origin: "http://localhost:5173",
@@ -32,7 +31,6 @@ app.use((req, res, next) => {
   console.log("📦 Content-Length:", req.get('Content-Length'));
   next();
 });
-
 
 //routes
 // Public routes 

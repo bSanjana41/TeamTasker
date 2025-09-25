@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import {config} from "dotenv"
+config({ path: "./.env" });
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/teamtasker';
 
 const dbConnect = async () => {
