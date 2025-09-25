@@ -16,6 +16,17 @@ export const createTask = async (data) => {
   });
 
   await task.save();
+
+    // Notify initial assignee
+  if (task.assignee) {
+    await Notification.create({
+      user: task.assignee,
+      task: task._id,
+      type: "assigned",
+      text: `You have been assigned to task "${task.title}"`
+    });
+  }
+
   return task;
 };
 
@@ -42,7 +53,7 @@ if (updates.assignee === "" || updates.assignee === null) {
     action: "task_updated",
     metadata: { taskId }
   });
-
+//new assignee notification
   if (updates.assignee && updates.assignee.toString() !== oldAssignee) {
     await Notification.create({
       user: updates.assignee,
@@ -51,6 +62,15 @@ if (updates.assignee === "" || updates.assignee === null) {
       text: `You have been assigned to task "${task.title}"`
     });
   }
+//update notification
+if (task.assignee && task.assignee.toString() !== userId) {
+  await Notification.create({
+    user: task.assignee,
+    task: task._id,
+    type: "updated",
+    text: `Task "${task.title}" has been updated`
+  });
+}
 
   return task;
 };

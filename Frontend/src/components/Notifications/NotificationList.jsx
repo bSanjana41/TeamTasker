@@ -5,9 +5,12 @@ import API from "../../api/API";
 export default function NotificationList() {
   const [notifications, setNotifications] = useState([]);
 
-  useEffect(() => {
-    API.get("/notifications").then(res => setNotifications(res.data));
-  }, []);
+ useEffect(() => {
+  API.get("/notifications").then(res => {
+    console.log(res.data); // Check if notifications are returned
+    setNotifications(res.data);
+  });
+}, []);
 
   const markRead = async (id) => {
     const res = await API.put(`/notifications/${id}/read`);
