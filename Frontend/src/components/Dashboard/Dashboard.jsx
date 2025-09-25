@@ -5,6 +5,7 @@ import NotificationList from "../Notifications/NotificationList";
 import TaskDetail from "../Tasks/Task";
 import Analytics from "./Analytics";
 import { useNavigate } from "react-router-dom";
+import AssignedTasks from "../Tasks/AssignedTasks";
 
 export default function Dashboard() {
   const { user, logout, loading } = useContext(AuthContext);
@@ -32,6 +33,8 @@ export default function Dashboard() {
           <>
             <div>
               <Analytics />
+                      <AssignedTasks onSelectTask={setSelectedTaskId} />   
+
               <Projects onSelectTask={setSelectedTaskId} />
             </div>
             <aside>

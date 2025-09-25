@@ -43,7 +43,7 @@ export default function Analytics() {
           <ul>
             {topUsers.length ? topUsers.map((row, idx) => (
               <li key={idx} style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ color: "#a3a3a3" }}>{String(row._id) === "null" ? "Unassigned" : String(row._id)}</span>
+                <span style={{ color: "#a3a3a3" }}>{(row.name)}</span>
                 <strong>{row.completed}</strong>
               </li>
             )) : <li style={{ color: "#a3a3a3" }}>No data</li>}

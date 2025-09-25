@@ -18,14 +18,46 @@ export const tasksPerDay = async (req, res) => {
   }
 };
 
+// export const topCompleters = async (req, res) => {
+//   try {
+//     const limit = parseInt(req.query.limit || "5", 10);
+//     const data = await Task.aggregate([
+//       { $match: { status: "Done", completedAt: { $ne: null } } },
+//       { $group: { _id: "$assignee", completed: { $sum: 1 } } },
+//       { $sort: { completed: -1 } },
+//       { $limit: limit }
+//     ]);
+
+//     res.json(data);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
 export const topCompleters = async (req, res) => {
   try {
     const limit = parseInt(req.query.limit || "5", 10);
+
     const data = await Task.aggregate([
       { $match: { status: "Done", completedAt: { $ne: null } } },
       { $group: { _id: "$assignee", completed: { $sum: 1 } } },
       { $sort: { completed: -1 } },
-      { $limit: limit }
+      { $limit: limit },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      { $unwind: { path: "$user", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          completed: 1,
+          name: { $ifNull: ["$user.name", "Unassigned"] }
+        }
+      }
     ]);
 
     res.json(data);

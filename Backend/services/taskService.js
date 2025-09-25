@@ -26,6 +26,11 @@ export const updateTask = async (taskId, updates, userId) => {
   if (!task) throw new Error("Task not found");
 
   const oldAssignee = task.assignee?.toString();
+if (updates.assignee === "" || updates.assignee === null) {
+    delete updates.assignee;
+  }
+
+
   Object.assign(task, updates);
   if (updates.status && updates.status === "Done" && !task.completedAt) {
     task.completedAt = new Date();
@@ -67,4 +72,10 @@ export const deleteTask = async (taskId, userId) => {
   });
 
   return task;
+};
+
+export const getTasksAssignedToUser = async (userId) => {
+  return Task.find({ assignee: userId })
+    .populate("assignee", "name email") 
+    .populate("project", "title");      
 };

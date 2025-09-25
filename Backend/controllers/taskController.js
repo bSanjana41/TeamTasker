@@ -56,17 +56,6 @@ export const createTask = async (req, res) => {
   }
 };
 
-// export const createTask = async (req, res) => {
-//   try {
-//     console.log("Incoming task data:", req.body);
-
-//     const task = await taskService.createTask(req.body);
-//     res.status(201).json(task);
-//   } catch (err) {
-//     console.error(" Error creating task:", err.message);
-//     res.status(400).json({ error: err.message });
-//   }
-// };
 export const getTasksByProject = async (req, res) => {
   try {
     const tasks = await taskService.getTasksByProject(req.params.projectId);
@@ -103,3 +92,16 @@ export const deleteTask = async (req, res) => {
   }
 };
 
+export const assignedTasks = async (req, res) => {
+  try {
+    const userId = req.user._id || req.user.id;
+    if (!userId) {
+      return res.status(400).json({ error: "User ID not found" });
+    }
+    
+    const tasks = await taskService.getTasksAssignedToUser(userId);
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
