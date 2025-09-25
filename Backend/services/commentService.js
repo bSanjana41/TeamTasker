@@ -1,5 +1,5 @@
 import Comment from "../models/CommentSchema.js";
-import ActivityLog from "../models/ActivityLogSchema.js";
+import ActivityLog from "../models/activityLogSchema.js";
 
 export const addComment = async (taskId, userId, text) => {
   const comment = new Comment({ task: taskId, author: userId, text });

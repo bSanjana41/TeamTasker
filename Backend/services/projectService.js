@@ -1,5 +1,5 @@
 import Project from "../models/projectSchema.js";
-import ActivityLog from "../models/ActivityLogSchema.js";
+import ActivityLog from "../models/activityLogSchema.js";
 
 export const createProject = async (data, userId) => {
   const project = new Project({ ...data, owner: userId });

@@ -1,5 +1,5 @@
 import Task from "../models/taskSchema.js";
-import ActivityLog from "../models/ActivityLogSchema.js";
+import ActivityLog from "../models/activityLogSchema.js";
 import Notification from "../models/notificationSchema.js";
 
 export const createTask = async (data) => {
