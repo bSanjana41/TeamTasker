@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../../api/API";
 import Modal from "../common/Modal";
-import APIUsers from "../../api/API";
 
 export default function TaskDetail({ taskId, onBack }) {
   const [task, setTask] = useState(null);
@@ -14,7 +13,7 @@ export default function TaskDetail({ taskId, onBack }) {
   useEffect(() => {
     API.get(`/tasks/${taskId}`).then(res => setTask(res.data));
     API.get(`/comments/${taskId}`).then(res => setComments(res.data));
-    APIUsers.get("/users").then(res => setUsers(res.data)).catch(() => setUsers([]));
+    API.get("/users").then(res => setUsers(res.data)).catch(() => setUsers([]));
   }, [taskId]);
 
   const addComment = (e) => {
@@ -49,7 +48,7 @@ export default function TaskDetail({ taskId, onBack }) {
       <h2>{task.title}</h2>
       <p>Status: {task.status}</p>
       <p>Priority: {task.priority}</p>
-      <p>Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "N/A"}</p>
+      {/* <p>Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "N/A"}</p> */}
 
       <button onClick={openEdit}>Edit Task</button>
       <button onClick={deleteTask}>Delete Task</button>
